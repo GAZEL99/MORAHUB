@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  
+  <!-- ==================== SEO & META TAGS ==================== -->
+  <title>Beli Viu Premium Murah & Terpercaya | MoraStore</title>
+  <meta name="description" content="Beli Viu Premium murah dan terpercaya di MoraStore. Streaming drama Korea dan Asia. Garansi full, proses cepat & aman.">
+  <meta name="keywords" content="viu premium murah, beli viu premium, viu premium premium, langganan viu premium murah, morastore viu">
+  <meta name="author" content="MoraStore">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / WhatsApp Preview -->
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="Viu Premium Murah | MoraStore">
+  <meta property="og:description" content="Streaming drama Korea dan Asia. Harga hemat, garansi full & proses kilat di MoraStore!">
+  <meta property="og:image" content="https://rblktttasrxemtkhknvt.supabase.co/storage/v1/object/public/product-images/viu.png">
+  <meta property="og:site_name" content="MoraStore App Prems">
+
+  <!-- Schema.org JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "Viu Premium",
+    "image": "https://rblktttasrxemtkhknvt.supabase.co/storage/v1/object/public/product-images/viu.png",
+    "description": "Streaming drama Korea dan Asia. Garansi resmi, proses cepat & aman.",
+    "brand": {
+      "@type": "Brand",
+      "name": "MoraStore"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "IDR",
+      "lowPrice": "5500",
+      "highPrice": "10000",
+      "offerCount": "3",
+      "availability": "https://schema.org/InStock"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "1890"
+    }
+  }
+  </script>
+
+  <link rel="icon" href="https://rblktttasrxemtkhknvt.supabase.co/storage/v1/object/public/product-images/logo.jpg" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* ==================== MORASTORE DESIGN SYSTEM ==================== */
+    :root {
+      --blue: #0033FF;
+      --blue-dark: #0022B8;
+      --blue-light: #D6DEFF;
+
+      --lime: #D8FF3E;
+      --lime-dark: #B9E300;
+      --lime-soft: #f4ffb3;
+
+      --primary: #0A0A12;
+      --text-dark: #0A0A12;
+      --text: #24242E;
+      --text-light: #6B6B78;
+      --light: #FFFFFF;
+      --light-gray: #F4F5FB;
+      --gray: #E3E5F3;
+      --border: #0A0A12;
+      --shadow: 5px 5px 0px var(--border);
+      --shadow-sm: 3px 3px 0px var(--border);
+      --shadow-lg: 8px 8px 0px var(--border);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --error: #FF4757;
+      --success: #10B981;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; touch-action: manipulation; }
+    @media (max-width: 768px) { html { font-size: 15px; } }
+    @media (max-width: 480px) { html { font-size: 14px; } }
+
+    body {
+      background: #FFFFFF;
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-top: 78px;
+      padding-bottom: 100px;
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+    }
+    @media (max-width: 480px) { body { padding-top: 64px; } }
+
+    /* ===== AMBIENT BACKGROUND (grid bergerak + blob mengambang) ===== */
+    .bg-ambient { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+    .bg-grid {
+      position: absolute; inset: -60px;
+      background-image:
+        linear-gradient(rgba(10,10,18,0.07) 1.5px, transparent 1.5px),
+        linear-gradient(90deg, rgba(10,10,18,0.07) 1.5px, transparent 1.5px);
+      background-size: 42px 42px;
+      animation: gridPan 14s linear infinite;
+    }
+    /* Bentuk outline geometris mengambang (gaya brutalist, tanpa blur/gradasi) */
+    .bg-shape { position: absolute; border: 3px solid var(--border); opacity: 0.5; background: transparent; }
+    .bg-shape.circle { border-radius: 50%; }
+    .bg-shape.square { border-radius: 8px; }
+    .bg-shape.diamond { border-radius: 8px; transform: rotate(45deg); }
+    .bg-shape.blue { border-color: var(--blue); background: rgba(0,51,255,0.12); opacity: 0.55; }
+    .bg-shape.lime { border-color: var(--lime-dark); background: rgba(216,255,62,0.35); opacity: 0.6; }
+
+    .bg-shape.s1 { width: 180px; height: 180px; top: 6%; left: -60px; animation: driftRotate1 13s ease-in-out infinite; }
+    .bg-shape.s2 { width: 130px; height: 130px; top: 16%; right: 4%; animation: driftRotate2 11s ease-in-out infinite; }
+    .bg-shape.s3 { width: 90px; height: 90px; top: 42%; left: 2%; animation: driftRotate3 9s ease-in-out infinite; }
+    .bg-shape.s4 { width: 220px; height: 220px; bottom: -80px; right: -60px; animation: driftRotate1 15s ease-in-out infinite reverse; }
+    .bg-shape.s5 { width: 70px; height: 70px; bottom: 18%; left: 10%; animation: driftRotate2 8s ease-in-out infinite; }
+    .bg-shape.s6 { width: 150px; height: 150px; top: 63%; right: 12%; animation: driftRotate3 12s ease-in-out infinite; }
+
+    @keyframes driftRotate1 { 0%,100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(50px,60px) rotate(30deg); } }
+    @keyframes driftRotate2 { 0%,100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(-45px,50px) rotate(-24deg); } }
+    @keyframes driftRotate3 { 0%,100% { transform: translate(0,0) rotate(45deg); } 50% { transform: translate(35px,-45px) rotate(80deg); } }
+
+    @keyframes driftRotate1 { 0%,100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(24px,32px) rotate(20deg); } }
+    @keyframes driftRotate2 { 0%,100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(-20px,26px) rotate(-16deg); } }
+    @keyframes driftRotate3 { 0%,100% { transform: translate(0,0) rotate(45deg); } 50% { transform: translate(16px,-24px) rotate(65deg); } }
+
+    /* Partikel kotak kecil melayang naik (aksen grid brutalist) */
+    .bg-particle {
+      position: absolute; bottom: -20px; border: 2px solid var(--border); opacity: 0;
+      animation: particleUp linear infinite;
+    }
+    @keyframes particleUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.85; }
+      90% { opacity: 0.7; }
+      100% { transform: translateY(-110vh) rotate(200deg); opacity: 0; }
+    }
+    @keyframes gridPan { from { transform: translate(0,0); } to { transform: translate(42px,42px); } }
+    @media (prefers-reduced-motion: reduce) { .bg-grid, .bg-shape, .bg-particle { animation: none !important; } }
+
+    /* ANIMATIONS */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+    @keyframes navbarIn { from { transform: translateY(-120%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .ripple-effect {
+      position: absolute; border-radius: 50%; background: rgba(255,255,255,0.45);
+      width: 10px; height: 10px; pointer-events: none; transform: scale(0);
+      animation: ripple 0.55s linear;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed; top: 14px; left: 14px; right: 14px;
+      background: var(--primary);
+      border: 2.5px solid var(--border); border-radius: 999px;
+      z-index: 1000; height: 58px; display: flex; align-items: center;
+      box-shadow: var(--shadow); transition: var(--transition);
+      animation: navbarIn 0.5s ease both; max-width: 1200px; margin: 14px auto 0;
+    }
+    @media (min-width: 769px) { .navbar { height: 66px; top: 16px; } }
+    @media (max-width: 480px) { .navbar { top: 10px; left: 10px; right: 10px; height: 52px; margin-top: 10px; } }
+
+    .nav-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; }
+
+    .logo { display: flex; align-items: center; gap: 9px; min-width: 0; flex-shrink: 0; }
+    .logo-image-container {
+      width: 40px; height: 40px; border: 2px solid var(--border); box-shadow: var(--shadow-sm);
+      overflow: hidden; background: var(--lime); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .logo-image { width: 100%; height: 100%; object-fit: cover; }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-main {
+      font-size: 1.05rem; font-weight: 900; color: #fff; line-height: 1;
+      letter-spacing: -0.3px; font-family: 'Cabinet Grotesk', 'Space Grotesk', sans-serif; text-transform: uppercase;
+    }
+    .logo-main span { color: var(--lime); }
+    .logo-sub { font-size: 0.55rem; font-weight: 700; letter-spacing: 2px; margin-top: 2px; color: rgba(255,255,255,0.6); text-transform: uppercase; }
+
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px;
+      background: var(--lime); color: var(--text-dark); border: 2.5px solid var(--border);
+      border-radius: 999px; font-weight: 800; font-size: 0.82rem; font-family: 'Space Grotesk', sans-serif;
+      box-shadow: var(--shadow-sm); transition: var(--transition);
+    }
+    .back-btn:hover { background: var(--blue); color: #fff; transform: translate(-2px, -2px); box-shadow: var(--shadow); }
+
+    /* LAYOUT CONTAINER */
+    .main-container {
+      max-width: 1200px; margin: 28px auto; padding: 0 18px;
+      display: flex; gap: 2rem; animation: fadeInUp 0.4s ease both;
+    }
+    @media (max-width: 850px) { .main-container { flex-direction: column; margin: 18px auto; gap: 1.2rem; padding: 0 12px; } }
+
+    /* Sidebar */
+    .sidebar { flex: 0 0 280px; position: sticky; top: 96px; height: fit-content; }
+    @media (max-width: 850px) { .sidebar { display: none; } }
+
+    .side-card {
+      background: var(--light); border: 2.5px solid var(--border); border-radius: var(--radius);
+      padding: 18px; margin-bottom: 16px; box-shadow: var(--shadow-sm); transition: var(--transition);
+    }
+    .side-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .side-card h3 {
+      font-size: 0.95rem; font-weight: 900; color: var(--text-dark); font-family: 'Space Grotesk', sans-serif;
+      padding-bottom: 10px; margin-bottom: 12px; border-bottom: 2.5px solid var(--border);
+      display: flex; align-items: center; gap: 8px; text-transform: uppercase;
+    }
+    .side-card h3 i { color: var(--blue); }
+
+    .feature-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--radius-sm);
+      background: var(--light-gray); border: 2px solid var(--border); font-size: 0.82rem; font-weight: 700;
+      margin-bottom: 8px; transition: var(--transition);
+    }
+    .feature-item i { color: var(--blue); font-size: 0.95rem; }
+
+    /* Main Content */
+    .main-content { flex: 1; min-width: 0; }
+
+    /* PRODUCT HERO BANNER */
+    .product-hero {
+      background: var(--blue);
+      background-image:
+        linear-gradient(rgba(255,255,255,0.12) 1.5px, transparent 1.5px),
+        linear-gradient(90deg, rgba(255,255,255,0.12) 1.5px, transparent 1.5px);
+      background-size: 36px 36px;
+      border: 2.5px solid var(--border); border-radius: var(--radius);
+      padding: 24px; color: white; position: relative; overflow: hidden; box-shadow: var(--shadow-lg);
+      margin-bottom: 22px;
+    }
+    @media (max-width: 480px) { .product-hero { padding: 18px; } }
+
+    .ph-badge {
+      display: inline-flex; align-items: center; gap: 6px; background: var(--lime); color: var(--text-dark);
+      font-weight: 900; font-size: 0.72rem; padding: 5px 14px; border-radius: 999px; border: 2px solid var(--border);
+      text-transform: uppercase; letter-spacing: 0.5px; font-family: 'Space Grotesk', sans-serif; margin-bottom: 14px;
+      box-shadow: 2px 2px 0 var(--border);
+    }
+
+    .ph-flex { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; flex-wrap: wrap; }
+    .ph-logo-wrap {
+      width: 68px; height: 68px; background: #fff; border: 2.5px solid var(--border); border-radius: 18px;
+      display: flex; align-items: center; justify-content: center; color: var(--blue); font-size: 2.3rem;
+      box-shadow: var(--shadow-sm); flex-shrink: 0;
+    }
+    @media (max-width: 480px) { .ph-logo-wrap { width: 54px; height: 54px; font-size: 1.8rem; border-radius: 14px; } }
+
+    .ph-details h1 {
+      font-size: 1.8rem; font-weight: 900; font-family: 'Cabinet Grotesk', 'Space Grotesk', sans-serif;
+      line-height: 1.15; letter-spacing: -0.5px; text-transform: uppercase; color: #fff;
+    }
+    @media (max-width: 480px) { .ph-details h1 { font-size: 1.35rem; } }
+    .ph-details p { color: rgba(255,255,255,0.9); font-size: 0.88rem; margin-top: 4px; font-weight: 500; }
+
+    .ph-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .ph-pill {
+      background: rgba(10,10,18,0.4); border: 1.5px solid rgba(255,255,255,0.3); backdrop-filter: blur(4px);
+      color: #fff; font-size: 0.75rem; font-weight: 700; padding: 5px 12px; border-radius: 999px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .ph-pill i { color: var(--lime); }
+
+    /* SECTION CARDS */
+    .section-card {
+      background: var(--light); border: 2.5px solid var(--border); border-radius: var(--radius);
+      padding: 22px; margin-bottom: 22px; box-shadow: var(--shadow-sm); transition: var(--transition);
+    }
+    .section-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    @media (max-width: 480px) { .section-card { padding: 16px; border-radius: 16px; margin-bottom: 16px; } }
+
+    .section-head {
+      display: flex; align-items: center; gap: 12px; padding-bottom: 14px;
+      margin-bottom: 18px; border-bottom: 2.5px solid var(--border);
+    }
+    .step-num {
+      width: 34px; height: 34px; background: var(--blue); color: white; border: 2px solid var(--border);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-family: 'Space Grotesk', sans-serif; box-shadow: 2px 2px 0 var(--border); flex-shrink: 0;
+    }
+    .section-head h2 { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; }
+    @media (max-width: 480px) { .section-head h2 { font-size: 0.98rem; } }
+
+    /* FORMS & INPUTS */
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-weight: 800; font-size: 0.88rem; color: var(--text-dark); margin-bottom: 6px; font-family: 'Space Grotesk', sans-serif; }
+    .form-group label span.req { color: var(--error); margin-left: 3px; }
+
+    input[type="text"], input[type="tel"], input[type="email"] {
+      width: 100%; padding: 13px 16px; background: var(--light-gray); border: 2.5px solid var(--border);
+      border-radius: var(--radius-sm); font-size: 0.92rem; font-weight: 600; font-family: 'Poppins', sans-serif;
+      color: var(--text-dark); outline: none; transition: var(--transition); box-shadow: inset 0 2px 0 rgba(0,0,0,0.03);
+    }
+    input:focus { background: #fff; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,51,255,0.15); }
+    .input-hint { font-size: 0.78rem; color: var(--text-light); margin-top: 6px; display: flex; align-items: center; gap: 6px; font-weight: 500; }
+    .input-hint i { color: var(--blue); }
+
+    /* PACKAGE GRID */
+    .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 768px) { .packages-grid { grid-template-columns: 1fr; } }
+
+    .pkg-card {
+      background: var(--light); border: 2.5px solid var(--border); border-radius: 16px;
+      padding: 16px; cursor: pointer; transition: var(--transition); text-align: left;
+      box-shadow: var(--shadow-sm); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .pkg-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--blue); }
+    .pkg-card.selected {
+      background: var(--blue); color: white; border-color: var(--border);
+      box-shadow: var(--shadow); transform: translateY(-3px);
+    }
+
+    .pkg-badge-popular {
+      position: absolute; top: 10px; right: 10px; background: var(--lime); color: var(--text-dark);
+      border: 1.5px solid var(--border); font-size: 0.65rem; font-weight: 900; padding: 2px 7px;
+      border-radius: 999px; font-family: 'Space Grotesk', sans-serif;
+      animation: badgePulse 1.6s ease-in-out infinite;
+    }
+    @keyframes badgePulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+    @keyframes cardPopIn { from { opacity: 0; transform: translateY(14px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .pkg-card { animation: cardPopIn 0.4s ease both; }
+    @keyframes totalFlash { 0% { transform: scale(1); } 35% { transform: scale(1.06); } 100% { transform: scale(1); } }
+    .total-flash { animation: totalFlash 0.35s ease; }
+
+    .pkg-name { font-size: 0.92rem; font-weight: 800; font-family: 'Space Grotesk', sans-serif; margin-bottom: 6px; line-height: 1.25; }
+    .pkg-price { font-size: 1.2rem; font-weight: 900; font-family: 'DM Mono', monospace; margin-bottom: 8px; color: var(--blue); }
+    .pkg-card.selected .pkg-price { color: var(--lime); }
+    
+    .pkg-dur {
+      font-size: 0.72rem; font-weight: 800; padding: 3px 9px; border-radius: 999px;
+      border: 1.5px solid var(--border); background: var(--light-gray); color: var(--text-dark); display: inline-block;
+    }
+    .pkg-card.selected .pkg-dur { background: rgba(255,255,255,0.2); color: white; border-color: rgba(255,255,255,0.4); }
+    .pkg-card.selected .pkg-name { color: white; }
+
+    /* QTY & SUMMARY */
+    .qty-box {
+      display: inline-flex; align-items: center; background: var(--light-gray);
+      border: 2.5px solid var(--border); border-radius: 12px; padding: 4px; gap: 8px;
+    }
+    .qty-btn {
+      width: 36px; height: 36px; background: #fff; border: 2px solid var(--border);
+      border-radius: 8px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      box-shadow: 2px 2px 0 var(--border); transition: var(--transition);
+    }
+    .qty-btn:active { transform: scale(0.9); box-shadow: 1px 1px 0 var(--border); }
+    .qty-btn:hover { background: var(--lime); color: var(--text-dark); }
+    .qty-val { width: 44px; text-align: center; font-weight: 900; font-family: 'DM Mono', monospace; font-size: 1.1rem; border: none; background: transparent; }
+
+    .summary-box {
+      background: var(--light-gray); border: 2.5px dashed var(--blue); border-radius: 16px;
+      padding: 18px; margin-top: 18px;
+    }
+    .summary-row { display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 8px; font-weight: 600; }
+    .summary-row span.val { font-weight: 800; color: var(--text-dark); }
+    .summary-total {
+      background: var(--primary); color: white; padding: 14px 18px; border-radius: 14px;
+      border: 2.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; margin-top: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .summary-total span.tot-val { font-size: 1.35rem; font-weight: 900; color: var(--lime); font-family: 'DM Mono', monospace; }
+
+    /* PROMO GROUP */
+    .promo-group { display: flex; gap: 8px; }
+    .btn-apply {
+      padding: 0 20px; background: var(--blue); color: white; border: 2.5px solid var(--border);
+      border-radius: 12px; font-weight: 800; font-family: 'Space Grotesk', sans-serif; cursor: pointer;
+      box-shadow: 2px 2px 0 var(--border); transition: var(--transition); white-space: nowrap;
+    }
+    .btn-apply:hover { background: var(--lime); color: var(--text-dark); transform: translate(-1px,-1px); }
+    .promo-msg { margin-top: 8px; padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; display: none; }
+    .promo-msg.success { background: rgba(16,185,129,0.15); color: var(--success); border: 1.5px solid var(--success); display: block; animation: fadeInUp 0.3s ease both; }
+    .promo-msg.error { background: rgba(255,71,87,0.15); color: var(--error); border: 1.5px solid var(--error); display: block; animation: fadeInUp 0.3s ease both; }
+
+    /* FIXED BOTTOM BAR */
+    .fixed-order-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; background: #fff;
+      border-top: 3px solid var(--border); padding: 14px 16px; z-index: 999;
+      box-shadow: 0 -4px 0 var(--border);
+    }
+    .fixed-order-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 6px; }
+    .btn-order {
+      width: 100%; padding: 14px; background: var(--blue); color: white; border: 2.5px solid var(--border);
+      border-radius: 999px; font-weight: 900; font-size: 1.05rem; font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px;
+      box-shadow: var(--shadow-sm); transition: var(--transition); opacity: 0.5; pointer-events: none;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .btn-order.active { opacity: 1; pointer-events: all; }
+    .btn-order.active:hover { background: var(--lime); color: var(--text-dark); transform: translateY(-2px); box-shadow: var(--shadow); }
+
+    .footer-bottom { text-align: center; color: var(--text-light); font-size: 0.75rem; margin-top: 24px; }
+  </style>
+</head>
+<body>
+  <div class="bg-ambient" aria-hidden="true">
+    <div class="bg-grid"></div>
+    <div class="bg-shape circle blue s1"></div>
+    <div class="bg-shape square lime s2"></div>
+    <div class="bg-shape diamond blue s3"></div>
+    <div class="bg-shape circle lime s4"></div>
+    <div class="bg-shape diamond blue s5"></div>
+    <div class="bg-shape square lime s6"></div>
+    <div class="bg-particle" style="left:8%; width:16px; height:16px; background:var(--lime); animation-duration:8s; animation-delay:0s;"></div>
+    <div class="bg-particle" style="left:22%; width:12px; height:12px; background:var(--blue); animation-duration:10s; animation-delay:1s;"></div>
+    <div class="bg-particle" style="left:38%; width:18px; height:18px; background:transparent; animation-duration:9s; animation-delay:3s;"></div>
+    <div class="bg-particle" style="left:55%; width:13px; height:13px; background:var(--lime); animation-duration:11s; animation-delay:0.5s;"></div>
+    <div class="bg-particle" style="left:70%; width:14px; height:14px; background:transparent; animation-duration:8.5s; animation-delay:4s;"></div>
+    <div class="bg-particle" style="left:84%; width:17px; height:17px; background:var(--blue); animation-duration:10.5s; animation-delay:2s;"></div>
+    <div class="bg-particle" style="left:92%; width:10px; height:10px; background:var(--lime); animation-duration:7.5s; animation-delay:3.5s;"></div>
+    <div class="bg-particle" style="left:14%; width:13px; height:13px; background:transparent; animation-duration:9.5s; animation-delay:5s;"></div>
+  </div>
+
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index" class="logo">
+        <div class="logo-image-container">
+          <img src="https://rblktttasrxemtkhknvt.supabase.co/storage/v1/object/public/product-images/logo.jpg" alt="MoraStore Logo" class="logo-image" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-bolt\' style=\'color:#0A0A12\'></i>'">
+        </div>
+        <div class="logo-text">
+          <div class="logo-main">MORA<span>STORE</span></div>
+          <div class="logo-sub">APP PREMS</div>
+        </div>
+      </a>
+      <a href="../index" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali</a>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <!-- Sidebar Desktop -->
+    <aside class="sidebar">
+      <div class="side-card">
+        <h3><i class="fas fa-tv"></i> Layanan Viu Premium</h3>
+        <p style="font-size:0.82rem; color:var(--text-light); margin-bottom:12px;">Streaming drama Korea dan Asia. Proses cepat, aman, dan bergaransi penuh selama durasi langganan.</p>
+      </div>
+      <div class="side-card">
+        <h3><i class="fas fa-shield-alt"></i> Jaminan MoraStore</h3>
+        <div class="feature-item"><i class="fas fa-bolt"></i> Proses Otomatis &amp; Cepat</div>
+        <div class="feature-item"><i class="fas fa-shield-alt"></i> Garansi Full Selama Masa Aktif</div>
+        <div class="feature-item"><i class="fas fa-tv"></i> Support All Device (TV/HP/PC)</div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Viu Premium Hero Banner -->
+      <div class="product-hero">
+        <div class="ph-badge"><i class="fas fa-fire"></i> Best Seller Kategori Film &amp; Series</div>
+        <div class="ph-flex">
+          <div class="ph-logo-wrap"><img src="https://rblktttasrxemtkhknvt.supabase.co/storage/v1/object/public/product-images/viu.png" alt="Viu Premium" style="width:100%;height:100%;object-fit:contain;border-radius:14px;" onerror="this.parentElement.innerHTML='<i class=\'fas fa-tv\'></i>'"></div>
+          <div class="ph-details">
+            <h1 id="product-name">Viu Premium</h1>
+            <p id="product-desc">Streaming drama Korea dan Asia</p>
+          </div>
+        </div>
+        <div class="ph-pills">
+          <span class="ph-pill"><i class="fas fa-tv"></i> Kualitas HD</span>
+          <span class="ph-pill"><i class="fas fa-lock"></i> Profil Ber-PIN</span>
+          <span class="ph-pill"><i class="fas fa-star"></i> Rating 4.9 (1.8k+ Order)</span>
+        </div>
+      </div>
+
+      <!-- Step 1: Input Data Customer -->
+      <div class="section-card reveal">
+        <div class="section-head">
+          <div class="step-num">1</div>
+          <h2>Nama Profil / Kontak Pengirim</h2>
+        </div>
+        <div id="dynamic-fields">
+          <div class="form-group">
+            <label>Nama Pemesan <span class="req">*</span></label>
+            <input type="text" id="input-profile-name" class="account-field" placeholder="contoh: Budi Santoso">
+            <div class="input-hint"><i class="fas fa-info-circle"></i> Nama ini membantu Admin CS mengenali pesanan Viu Premium kamu.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Pilih Paket -->
+      <div class="section-card reveal">
+        <div class="section-head">
+          <div class="step-num">2</div>
+          <h2>Pilih Paket Viu Premium</h2>
+        </div>
+        <div id="packages-container" class="packages-grid">
+          <div style="grid-column:1/-1; text-align:center; padding:20px; color:var(--text-light);">
+            <i class="fas fa-spinner fa-spin" style="color:var(--blue);font-size:1.4rem;"></i>
+            <p style="margin-top:8px;font-weight:600;">Memuat paket dari database...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Qty & Summary -->
+      <div class="section-card reveal">
+        <div class="section-head">
+          <div class="step-num">3</div>
+          <h2>Jumlah &amp; Ringkasan Pesanan</h2>
+        </div>
+        <div class="form-group">
+          <label>Jumlah Pembelian</label>
+          <div class="qty-box">
+            <button class="qty-btn" id="minus-btn"><i class="fas fa-minus"></i></button>
+            <input type="text" id="qty-input" class="qty-val" value="1" readonly>
+            <button class="qty-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+        <div class="summary-box">
+          <div class="summary-row"><span>Produk</span><span class="val" id="sum-product">Viu Premium</span></div>
+          <div class="summary-row"><span>Paket Pilihan</span><span class="val" id="sum-package">-</span></div>
+          <div class="summary-row"><span>Harga Satuan</span><span class="val" id="sum-price">Rp 0</span></div>
+          <div class="summary-row" id="sum-promo-row" style="display:none;"><span>Diskon Promo</span><span class="val" id="sum-discount" style="color:var(--success)">-</span></div>
+          <div class="summary-total">
+            <span>Total Pembayaran</span>
+            <span class="tot-val" id="sum-total">Rp 0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Promo & Kontak -->
+      <div class="section-card reveal">
+        <div class="section-head">
+          <div class="step-num">4</div>
+          <h2>Konfirmasi Kontak &amp; Kode Promo</h2>
+        </div>
+        <div class="form-group">
+          <label>Kode Promo (Opsional)</label>
+          <div class="promo-group">
+            <input type="text" id="promo-code" placeholder="PUNYA KODE PROMO?" style="text-transform:uppercase">
+            <button class="btn-apply" id="btn-apply-promo">Gunakan</button>
+          </div>
+          <div class="promo-msg" id="promo-message"></div>
+        </div>
+        <div class="form-group">
+          <label>Nomor WhatsApp Kamu <span class="req">*</span></label>
+          <input type="tel" id="input-wa" placeholder="081234567890">
+          <div class="input-hint"><i class="fas fa-shield-alt"></i> Digunakan untuk pengiriman bukti pembayaran, akun &amp; PIN profil.</div>
+        </div>
+      </div>
+
+      <p class="footer-bottom">&copy; <span id="currentYear"></span> MoraStore App Prems. All rights reserved.</p>
+    </main>
+  </div>
+
+  <!-- Order Fixed Bottom Bar -->
+  <div class="fixed-order-bar">
+    <div class="fixed-order-inner">
+      <button class="btn-order" id="btn-submit-order" disabled>
+        <i class="fas fa-shopping-cart"></i> BELI SEKARANG
+      </button>
+    </div>
+  </div>
+
+  <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL = 'https://rblktttasrxemtkhknvt.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJibGt0dHRhc3J4ZW10a2hrbnZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU0NDQ5MzMsImV4cCI6MjEwMTAyMDkzM30.l4mPqAlPhZk-Z73_sKNARc3qTxAfUsKZyNl9u6N90Lw';
+
+    let supabaseClient = null;
+    try { supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch(e) {}
+
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+      const io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+
+      function addRipple(el) {
+        if (!el) return;
+        el.addEventListener('click', function(e) {
+          var r = document.createElement('span'); r.className = 'ripple-effect';
+          var rect = el.getBoundingClientRect();
+          r.style.left = (e.clientX - rect.left - 5) + 'px';
+          r.style.top = (e.clientY - rect.top - 5) + 'px';
+          el.appendChild(r);
+          setTimeout(function() { r.remove(); }, 600);
+        });
+      }
+
+      var activeProduct = null;
+      var activePackages = [];
+      var selectedPackage = null;
+      var appliedPromo = null;
+
+      var inputProfile = document.getElementById('input-profile-name');
+      var inputWa = document.getElementById('input-wa');
+      var qtyInput = document.getElementById('qty-input');
+      var minusBtn = document.getElementById('minus-btn');
+      var plusBtn = document.getElementById('plus-btn');
+
+      var sumPackage = document.getElementById('sum-package');
+      var sumPrice = document.getElementById('sum-price');
+      var sumPromoRow = document.getElementById('sum-promo-row');
+      var sumDiscount = document.getElementById('sum-discount');
+      var sumTotal = document.getElementById('sum-total');
+
+      var promoCodeInput = document.getElementById('promo-code');
+      var btnApplyPromo = document.getElementById('btn-apply-promo');
+      var promoMessage = document.getElementById('promo-message');
+      var btnSubmit = document.getElementById('btn-submit-order');
+
+      function fmt(n) { return 'Rp ' + (n || 0).toLocaleString('id-ID'); }
+
+      function updateSummary() {
+        if (!selectedPackage) return;
+        var qty = parseInt(qtyInput.value) || 1;
+        var base = selectedPackage.price * qty;
+        var disc = 0;
+
+        if (appliedPromo) {
+          if (appliedPromo.discount_type === 'percentage') {
+            disc = Math.round(base * appliedPromo.discount);
+            if (appliedPromo.max_discount && disc > appliedPromo.max_discount) disc = appliedPromo.max_discount;
+          } else if (appliedPromo.discount_type === 'fixed') {
+            disc = Math.min(appliedPromo.fixed_amount, base);
+          }
+        }
+
+        var total = Math.max(0, base - disc);
+        sumPackage.textContent = selectedPackage.name + ' (' + qty + 'x)';
+        sumPrice.textContent = fmt(selectedPackage.price);
+        if (sumTotal.textContent !== fmt(total)) {
+          sumTotal.textContent = fmt(total);
+          sumTotal.classList.remove('total-flash');
+          void sumTotal.offsetWidth;
+          sumTotal.classList.add('total-flash');
+        }
+
+        if (appliedPromo) {
+          sumPromoRow.style.display = 'flex';
+          sumDiscount.textContent = '-' + fmt(disc);
+        } else {
+          sumPromoRow.style.display = 'none';
+        }
+
+        validate();
+      }
+
+      function validate() {
+        var profileVal = inputProfile.value.trim();
+        var waVal = inputWa.value.trim();
+        if (selectedPackage && profileVal.length >= 2 && waVal.length >= 8) {
+          btnSubmit.disabled = false;
+          btnSubmit.classList.add('active');
+        } else {
+          btnSubmit.disabled = true;
+          btnSubmit.classList.remove('active');
+        }
+      }
+
+      inputProfile.addEventListener('input', validate);
+      inputWa.addEventListener('input', validate);
+
+      minusBtn.onclick = function() {
+        var q = parseInt(qtyInput.value) || 1;
+        if (q > 1) { qtyInput.value = q - 1; updateSummary(); }
+      };
+      plusBtn.onclick = function() {
+        qtyInput.value = (parseInt(qtyInput.value) || 1) + 1;
+        updateSummary();
+      };
+      addRipple(minusBtn); addRipple(plusBtn);
+
+      // PROMO CODE
+      btnApplyPromo.onclick = async function() {
+        var code = promoCodeInput.value.trim().toUpperCase();
+        if (!code) {
+          promoMessage.className = 'promo-msg error';
+          promoMessage.textContent = '❌ Masukkan kode promo terlebih dahulu!';
+          return;
+        }
+
+        if (!supabaseClient) {
+          promoMessage.className = 'promo-msg error';
+          promoMessage.textContent = '❌ Server promo offline.';
+          return;
+        }
+
+        btnApplyPromo.disabled = true;
+        btnApplyPromo.textContent = '...';
+
+        try {
+          var { data, error } = await supabaseClient
+            .from('promo_codes')
+            .select('*')
+            .eq('code', code)
+            .eq('is_active', true)
+            .single();
+
+          btnApplyPromo.disabled = false;
+          btnApplyPromo.textContent = 'Gunakan';
+
+          if (error || !data) {
+            appliedPromo = null;
+            promoMessage.className = 'promo-msg error';
+            promoMessage.textContent = '❌ Kode promo tidak valid atau kadaluarsa.';
+            updateSummary();
+            return;
+          }
+
+          var label = data.discount_type === 'percentage'
+            ? data.discount_value + '%'
+            : 'Rp ' + Number(data.discount_value).toLocaleString('id-ID');
+
+          appliedPromo = {
+            code: data.code,
+            discount_type: data.discount_type,
+            discount: data.discount_type === 'percentage' ? data.discount_value / 100 : null,
+            fixed_amount: data.discount_type === 'fixed' ? data.discount_value : null,
+            max_discount: data.max_discount_amount || null
+          };
+
+          promoMessage.className = 'promo-msg success';
+          promoMessage.textContent = '✅ Promo terpasang! Diskon ' + label;
+        } catch(e) {
+          btnApplyPromo.disabled = false;
+          btnApplyPromo.textContent = 'Gunakan';
+          promoMessage.className = 'promo-msg error';
+          promoMessage.textContent = '❌ Terjadi kesalahan pada promo.';
+        }
+
+        updateSummary();
+      };
+      addRipple(btnApplyPromo);
+
+      function renderPackages() {
+        var container = document.getElementById('packages-container');
+        if (!container) return;
+        container.innerHTML = '';
+
+        if (activePackages.length === 0) {
+          container.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-light);padding:20px;">Tidak ada paket Viu Premium tersedia saat ini.</div>';
+          return;
+        }
+
+        activePackages.forEach(function(pkg, i) {
+          var isPopular = pkg.name.toLowerCase().includes('shared') || pkg.is_popular;
+          var card = document.createElement('div');
+          card.className = 'pkg-card' + (i === 0 ? ' selected' : '');
+          card.style.animationDelay = (i * 0.08) + 's';
+          card.innerHTML = `
+            ${isPopular ? '<div class="pkg-badge-popular">PALING HEMAT</div>' : ''}
+            <div class="pkg-name">${pkg.name}</div>
+            <div class="pkg-price">${fmt(pkg.price)}</div>
+            <div><span class="pkg-dur">${pkg.duration || '1 BULAN'}</span></div>
+          `;
+          card.onclick = function() {
+            document.querySelectorAll('.pkg-card').forEach(function(c) { c.classList.remove('selected'); });
+            card.classList.add('selected');
+            selectedPackage = pkg;
+            updateSummary();
+          };
+          addRipple(card);
+          container.appendChild(card);
+
+          if (i === 0) selectedPackage = pkg;
+        });
+
+        updateSummary();
+      }
+
+      // GENERATE TOKEN PENDEK, SIMPAN ORDER KE DB, LALU REDIRECT KE PAY DENGAN URL PENDEK
+      function generateOrderToken() {
+        var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        var arr = new Uint8Array(7);
+        (window.crypto || window.msCrypto).getRandomValues(arr);
+        var t = '';
+        for (var i = 0; i < arr.length; i++) t += chars[arr[i] % chars.length];
+        return t;
+      }
+
+      btnSubmit.onclick = async function() {
+        if (btnSubmit.disabled || !selectedPackage) return;
+
+        var profile = inputProfile.value.trim();
+        var wa = inputWa.value.trim();
+        var qty = parseInt(qtyInput.value) || 1;
+        var base = selectedPackage.price * qty;
+        var disc = 0;
+
+        if (appliedPromo) {
+          if (appliedPromo.discount_type === 'percentage') {
+            disc = Math.round(base * appliedPromo.discount);
+            if (appliedPromo.max_discount && disc > appliedPromo.max_discount) disc = appliedPromo.max_discount;
+          } else if (appliedPromo.discount_type === 'fixed') {
+            disc = Math.min(appliedPromo.fixed_amount, base);
+          }
+        }
+        var total = Math.max(0, base - disc);
+
+        btnSubmit.disabled = true;
+        btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+
+        var token = generateOrderToken();
+
+        try {
+          if (supabaseClient) {
+            await supabaseClient.from('orders').insert({
+              order_id: token,
+              product_name: 'Viu Premium',
+              package_name: selectedPackage.name,
+              price: selectedPackage.price,
+              quantity: qty,
+              total_amount: total,
+              customer_whatsapp: wa || profile || '-',
+              account_data: { profile: profile, promo: appliedPromo ? appliedPromo.code : '', discount: disc },
+              status: 'Draft'
+            });
+          }
+        } catch (e) { console.error('MoraStore: gagal membuat draft order', e); }
+
+        window.location.href = '../pay?o=' + token;
+      };
+      addRipple(btnSubmit);
+
+      // FALLBACK VIU PREMIUM DATA
+      function loadFallbackViu() {
+        activeProduct = { name: 'Viu Premium', description: 'Streaming drama Korea dan Asia' };
+        activePackages = [
+          { id: '1', name: 'VIU Anti Limit 1 Tahun', price: 5500, duration: '1 TAHUN', is_popular: true },
+          { id: '2', name: 'VIU Anti Limit Lifetime', price: 5800, duration: 'LIFETIME' },
+          { id: '3', name: 'VIU Anti Limit 1 Bulan', price: 10000, duration: '1 BULAN' }
+        ];
+        renderPackages();
+      }
+
+      // FETCH FROM SUPABASE
+      async function fetchViuData() {
+        try {
+          if (!supabaseClient) throw new Error('Supabase client null');
+          
+          var prodResult = await supabaseClient.from('products').select('*').eq('slug', 'Viu').single();
+          if (prodResult.error || !prodResult.data) throw prodResult.error || new Error('Viu Premium tidak ditemukan');
+
+          activeProduct = prodResult.data;
+          document.getElementById('product-name').textContent = activeProduct.name;
+          if (activeProduct.description) document.getElementById('product-desc').textContent = activeProduct.description;
+
+          var pkgResult = await supabaseClient.from('product_packages').select('*').eq('product_id', activeProduct.id);
+          if (!pkgResult.error && pkgResult.data && pkgResult.data.length > 0) {
+            activePackages = pkgResult.data;
+          } else {
+            loadFallbackViu();
+            return;
+          }
+
+          renderPackages();
+        } catch(e) {
+          console.warn('Gagal ambil Supabase, pakai data fallback Viu Premium:', e);
+          loadFallbackViu();
+        }
+      }
+
+      fetchViuData();
+    });
+  </script>
+</body>
+</html>
+
