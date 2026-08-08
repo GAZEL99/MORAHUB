@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>Pembayaran QRIS - MoraStore</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="https://rblktttasrxemtkhknvt.supabase.co/storage/v1/object/public/product-images/logo.jpg" type="image/jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  /* ==================== MORASTORE DESIGN SYSTEM (sama dengan Netflix.html/YouTube.html) ==================== */
+  :root {
+    --blue: #0033FF;
+    --blue-dark: #0022B8;
+    --blue-light: #D6DEFF;
+
+    --lime: #D8FF3E;
+    --lime-dark: #B9E300;
+    --lime-soft: #f4ffb3;
+
+    --primary: #0A0A12;
+    --text-dark: #0A0A12;
+    --text: #24242E;
+    --text-light: #6B6B78;
+    --light: #FFFFFF;
+    --light-gray: #F4F5FB;
+    --gray: #E3E5F3;
+    --border: #0A0A12;
+    --shadow: 5px 5px 0px var(--border);
+    --shadow-sm: 3px 3px 0px var(--border);
+    --shadow-lg: 8px 8px 0px var(--border);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --error: #FF4757;
+    --success: #10B981;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; touch-action: manipulation; }
+  @media (max-width: 480px) { html { font-size: 14px; } }
+
+  body {
+    background: var(--light-gray);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-top: 90px;
+    padding-bottom: 60px;
+    font-family: 'Poppins', sans-serif;
+    display: flex; flex-direction: column; align-items: center;
+    position: relative;
+  }
+  @media (max-width: 480px) { body { padding-top: 76px; } }
+
+  /* ===== AMBIENT BACKGROUND (grid bergerak + blob mengambang) ===== */
+  .bg-ambient { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+  .bg-grid {
+    position: absolute; inset: -60px;
+    background-image:
+      linear-gradient(rgba(10,10,18,0.07) 1.5px, transparent 1.5px),
+      linear-gradient(90deg, rgba(10,10,18,0.07) 1.5px, transparent 1.5px);
+    background-size: 42px 42px;
+    animation: gridPan 14s linear infinite;
+  }
+  /* Bentuk outline geometris mengambang (gaya brutalist, tanpa blur/gradasi) */
+  .bg-shape { position: absolute; border: 3px solid var(--border); opacity: 0.5; background: transparent; }
+  .bg-shape.circle { border-radius: 50%; }
+  .bg-shape.square { border-radius: 8px; }
+  .bg-shape.diamond { border-radius: 8px; transform: rotate(45deg); }
+  .bg-shape.blue { border-color: var(--blue); background: rgba(0,51,255,0.12); opacity: 0.55; }
+  .bg-shape.lime { border-color: var(--lime-dark); background: rgba(216,255,62,0.35); opacity: 0.6; }
+
+  .bg-shape.s1 { width: 180px; height: 180px; top: 6%; left: -60px; animation: driftRotate1 13s ease-in-out infinite; }
+  .bg-shape.s2 { width: 130px; height: 130px; top: 16%; right: 4%; animation: driftRotate2 11s ease-in-out infinite; }
+  .bg-shape.s3 { width: 90px; height: 90px; top: 42%; left: 2%; animation: driftRotate3 9s ease-in-out infinite; }
+  .bg-shape.s4 { width: 220px; height: 220px; bottom: -80px; right: -60px; animation: driftRotate1 15s ease-in-out infinite reverse; }
+  .bg-shape.s5 { width: 70px; height: 70px; bottom: 18%; left: 10%; animation: driftRotate2 8s ease-in-out infinite; }
+  .bg-shape.s6 { width: 150px; height: 150px; top: 63%; right: 12%; animation: driftRotate3 12s ease-in-out infinite; }
+
+  @keyframes driftRotate1 { 0%,100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(50px,60px) rotate(30deg); } }
+  @keyframes driftRotate2 { 0%,100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(-45px,50px) rotate(-24deg); } }
+  @keyframes driftRotate3 { 0%,100% { transform: translate(0,0) rotate(45deg); } 50% { transform: translate(35px,-45px) rotate(80deg); } }
+
+  /* Partikel kotak kecil melayang naik (aksen grid brutalist) */
+  .bg-particle {
+    position: absolute; bottom: -20px; border: 2px solid var(--border); opacity: 0;
+    animation: particleUp linear infinite;
+  }
+  @keyframes particleUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.85; }
+    90% { opacity: 0.7; }
+    100% { transform: translateY(-110vh) rotate(200deg); opacity: 0; }
+  }
+  @keyframes gridPan { from { transform: translate(0,0); } to { transform: translate(42px,42px); } }
+  @media (prefers-reduced-motion: reduce) { .bg-grid, .bg-shape, .bg-particle { animation: none !important; } }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ===== ANIMASI ===== */
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes navbarIn { from { transform: translateY(-120%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pulse { 0%,100% { opacity: 0.35; } 50% { opacity: 1; } }
+  @keyframes pulseBorder { 0%,100% { box-shadow: 0 0 0 0 rgba(0,51,255,0.35), var(--shadow-sm); } 50% { box-shadow: 0 0 0 10px rgba(0,51,255,0), var(--shadow-sm); } }
+  @keyframes pulseBorderRed { 0%,100% { box-shadow: 0 0 0 0 rgba(255,71,87,0.4); } 50% { box-shadow: 0 0 0 8px rgba(255,71,87,0); } }
+  @keyframes shimmer { 0% { background-position: -300px 0; } 100% { background-position: 300px 0; } }
+  @keyframes bounceIn { 0% { transform: scale(0.3); opacity: 0; } 55% { transform: scale(1.12); opacity: 1; } 75% { transform: scale(0.94); } 100% { transform: scale(1); } }
+  @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes confettiFall { 0% { transform: translateY(-20px) rotate(0deg); opacity: 1; } 100% { transform: translateY(340px) rotate(600deg); opacity: 0; } }
+  @keyframes checkDraw { from { stroke-dashoffset: 40; } to { stroke-dashoffset: 0; } }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  .ripple-effect {
+    position: absolute; border-radius: 50%; background: rgba(255,255,255,0.45);
+    width: 10px; height: 10px; pointer-events: none; transform: scale(0);
+    animation: ripple 0.55s linear;
+  }
+
+  /* ===== NAVBAR (identik dengan Netflix.html/YouTube.html) ===== */
+  .navbar {
+    position: fixed; top: 14px; left: 14px; right: 14px;
+    background: var(--primary);
+    border: 2.5px solid var(--border); border-radius: 999px;
+    z-index: 1000; height: 58px; display: flex; align-items: center;
+    box-shadow: var(--shadow); transition: var(--transition);
+    animation: navbarIn 0.5s ease both; max-width: 1200px; margin: 14px auto 0;
+  }
+  @media (min-width: 769px) { .navbar { height: 66px; top: 16px; } }
+  @media (max-width: 480px) { .navbar { top: 10px; left: 10px; right: 10px; height: 52px; margin-top: 10px; } }
+
+  .nav-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; }
+
+  .logo { display: flex; align-items: center; gap: 9px; min-width: 0; flex-shrink: 0; }
+  .logo-image-container {
+    width: 40px; height: 40px; border: 2px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; background: var(--lime); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .logo-image { width: 100%; height: 100%; object-fit: cover; }
+  .logo-text { display: flex; flex-direction: column; }
+  .logo-main {
+    font-size: 1.05rem; font-weight: 900; color: #fff; line-height: 1;
+    letter-spacing: -0.3px; font-family: 'Cabinet Grotesk', 'Space Grotesk', sans-serif; text-transform: uppercase;
+  }
+  .logo-main span { color: var(--lime); }
+  .logo-sub { font-size: 0.55rem; font-weight: 700; letter-spacing: 2px; margin-top: 2px; color: rgba(255,255,255,0.6); text-transform: uppercase; }
+
+  .nav-status {
+    display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px;
+    background: rgba(255,255,255,0.08); color: #fff; border: 2px solid rgba(255,255,255,0.25);
+    border-radius: 999px; font-weight: 700; font-size: 0.72rem; font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .nav-status .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); animation: pulse 1.3s ease-in-out infinite; }
+  @media (max-width: 480px) { .nav-status span.txt { display: none; } .nav-status { padding: 8px 10px; } }
+
+  /* ===== CONTAINER ===== */
+  .main-container {
+    max-width: 460px; width: 100%; margin: 0 auto; padding: 0 16px;
+    animation: fadeInUp 0.4s ease both;
+  }
+
+  /* ===== HERO (pola sama seperti .product-hero di Netflix/YouTube) ===== */
+  .payment-hero {
+    background: var(--blue);
+    background-image:
+      linear-gradient(rgba(255,255,255,0.12) 1.5px, transparent 1.5px),
+      linear-gradient(90deg, rgba(255,255,255,0.12) 1.5px, transparent 1.5px);
+    background-size: 36px 36px;
+    border: 2.5px solid var(--border); border-radius: var(--radius);
+    padding: 24px; color: white; position: relative; overflow: hidden; box-shadow: var(--shadow-lg);
+    margin-bottom: 22px; text-align: center;
+  }
+  @media (max-width: 480px) { .payment-hero { padding: 20px 16px; } }
+
+  .ph-badge {
+    display: inline-flex; align-items: center; gap: 6px; background: var(--lime); color: var(--text-dark);
+    font-weight: 900; font-size: 0.72rem; padding: 5px 14px; border-radius: 999px; border: 2px solid var(--border);
+    text-transform: uppercase; letter-spacing: 0.5px; font-family: 'Space Grotesk', sans-serif; margin-bottom: 16px;
+    box-shadow: 2px 2px 0 var(--border);
+  }
+  .ph-badge .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text-dark); animation: pulse 1.3s ease-in-out infinite; }
+
+  .ph-icon-wrap {
+    width: 62px; height: 62px; background: #fff; border: 2.5px solid var(--border); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; color: var(--blue); font-size: 1.7rem;
+    box-shadow: var(--shadow-sm); margin: 0 auto 14px; animation: floatY 3s ease-in-out infinite;
+  }
+
+  .payment-hero h1 {
+    font-size: 1.55rem; font-weight: 900; font-family: 'Cabinet Grotesk', 'Space Grotesk', sans-serif;
+    line-height: 1.15; letter-spacing: -0.5px; text-transform: uppercase; color: #fff;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.25);
+  }
+  .payment-hero h1 .accent { color: var(--lime); }
+  @media (max-width: 480px) { .payment-hero h1 { font-size: 1.28rem; } }
+
+  .ph-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; justify-content: center; }
+  .ph-pill {
+    background: rgba(10,10,18,0.4); border: 1.5px solid rgba(255,255,255,0.3); backdrop-filter: blur(4px);
+    color: #fff; font-size: 0.72rem; font-weight: 700; padding: 5px 12px; border-radius: 999px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .ph-pill i { color: var(--lime); }
+
+  /* ===== SECTION CARDS (identik dengan .section-card) ===== */
+  .section-card {
+    background: var(--light); border: 2.5px solid var(--border); border-radius: var(--radius);
+    padding: 22px; margin-bottom: 20px; box-shadow: var(--shadow-sm); transition: var(--transition);
+  }
+  @media (max-width: 480px) { .section-card { padding: 16px; border-radius: 16px; margin-bottom: 16px; } }
+
+  .section-head {
+    display: flex; align-items: center; gap: 12px; padding-bottom: 14px;
+    margin-bottom: 16px; border-bottom: 2.5px solid var(--border);
+  }
+  .step-num {
+    width: 34px; height: 34px; background: var(--blue); color: white; border: 2px solid var(--border);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-family: 'Space Grotesk', sans-serif; box-shadow: 2px 2px 0 var(--border); flex-shrink: 0;
+  }
+  .section-head h2 { font-size: 1.02rem; font-weight: 800; color: var(--text-dark); font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; }
+
+  /* ===== ORDER SUMMARY ===== */
+  .order-row { display: flex; justify-content: space-between; font-size: 0.88rem; padding: 5px 0; color: var(--text); font-weight: 500; }
+  .order-row span:first-child { color: var(--text-light); }
+  .order-row.total {
+    background: var(--primary); color: white; padding: 14px 16px; border-radius: 14px;
+    border: 2.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; margin-top: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .order-row.total span:first-child { color: rgba(255,255,255,0.75); font-weight: 700; }
+  .order-row.total span:last-child { font-size: 1.3rem; font-weight: 900; color: var(--lime); font-family: 'DM Mono', monospace; }
+
+  .process-note {
+    display: flex; align-items: center; gap: 8px; background: var(--blue-light); color: var(--blue-dark);
+    border: 2px solid var(--blue); border-radius: 12px; padding: 10px 14px; font-size: 0.76rem; font-weight: 700;
+    text-align: left; width: 100%; letter-spacing: 0.2px; font-family: 'Space Grotesk', sans-serif; margin-top: 14px;
+  }
+
+  /* ===== STATES ===== */
+  #stateLoading, #stateQr, #stateSuccess, #stateExpired, #stateError { display: none; }
+  .active-state { display: block !important; animation: fadeInUp 0.4s ease both; }
+
+  /* LOADING - shimmer skeleton */
+  .loader { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 10px 0 6px; }
+  .skeleton-qr {
+    width: 200px; height: 200px; border-radius: 16px; border: 2.5px solid var(--border);
+    background: linear-gradient(90deg, var(--light-gray) 0px, #ffffff 40px, var(--light-gray) 80px);
+    background-size: 300px 100%; animation: shimmer 1.3s infinite linear;
+  }
+  .loader p { color: var(--text-light); font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .spinner-sm { width: 16px; height: 16px; border: 3px solid var(--gray); border-top-color: var(--blue); border-radius: 50%; animation: spin 0.7s linear infinite; }
+
+  /* QR STATE */
+  .qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .amount-big { font-size: 1.6rem; font-weight: 900; color: var(--primary); font-family: 'DM Mono', monospace; }
+  .qr-box {
+    background: var(--light); border: 2.5px solid var(--border); border-radius: 16px; padding: 14px;
+    box-shadow: var(--shadow-sm); animation: pulseBorder 2.4s ease-in-out infinite;
+  }
+  .qr-box img { width: 210px; height: 210px; display: block; border-radius: 4px; }
+
+  .timer {
+    display: flex; align-items: center; gap: 8px; background: var(--light-gray); color: var(--text-dark);
+    border: 2px solid var(--border); border-radius: 999px; padding: 7px 18px; font-weight: 800; font-size: 0.9rem;
+    font-family: 'DM Mono', monospace; transition: var(--transition);
+  }
+  .timer.urgent { background: #FFF0F0; color: var(--error); border-color: var(--error); animation: pulseBorderRed 1.1s ease-in-out infinite; }
+  .timer i { color: var(--blue); }
+  .timer.urgent i { color: var(--error); }
+
+  .polling-hint { display: flex; align-items: center; gap: 8px; color: var(--text-light); font-size: 0.8rem; font-weight: 600; }
+  .poll-dots { display: flex; gap: 4px; }
+  .poll-dots span { width: 6px; height: 6px; background: var(--blue); border-radius: 50%; animation: pulse 1s ease-in-out infinite; }
+  .poll-dots span:nth-child(2) { animation-delay: 0.15s; }
+  .poll-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+  .save-btn {
+    margin-top: 4px; width: 100%; padding: 12px; border-radius: 999px; border: 2.5px solid var(--border);
+    background: var(--light); font-weight: 800; font-size: 0.85rem; cursor: pointer; box-shadow: var(--shadow-sm);
+    font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 0.3px; position: relative; overflow: hidden;
+    transition: var(--transition);
+  }
+  .save-btn:hover { background: var(--lime); transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--border); }
+  .save-btn:active { transform: translate(2px,2px); box-shadow: none; }
+
+  /* RESULT STATES */
+  .result-icon-wrap { position: relative; width: 84px; height: 84px; margin: 0 auto 18px; }
+  .result-icon {
+    width: 84px; height: 84px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 2.2rem; border: 3px solid var(--border); box-shadow: var(--shadow-sm);
+    animation: bounceIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  .result-icon.success { background: var(--lime); color: var(--primary); }
+  .result-icon.error, .result-icon.expired { background: #FFF0F0; color: var(--error); }
+
+  .confetti-piece {
+    position: absolute; top: -10px; width: 7px; height: 12px; opacity: 0.9;
+    animation: confettiFall 1.6s ease-in forwards;
+  }
+
+  .result-title {
+    text-align: center; font-size: 1.28rem; font-weight: 900; color: var(--primary); margin-bottom: 8px;
+    font-family: 'Cabinet Grotesk', 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: -0.3px;
+  }
+  .result-desc { text-align: center; color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.55; font-weight: 500; }
+
+  .btn {
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; gap: 9px; width: 100%; text-align: center;
+    padding: 14px; border-radius: 999px; font-weight: 800; font-size: 0.88rem; border: 2.5px solid var(--border);
+    cursor: pointer; text-decoration: none; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase;
+    letter-spacing: 0.3px; transition: var(--transition);
+  }
+  .btn-primary { background: var(--lime); color: var(--primary); box-shadow: var(--shadow-sm); margin-bottom: 10px; }
+  .btn-primary:hover { transform: translate(-1px,-1px); box-shadow: 5px 5px 0 var(--border); background: var(--lime-dark); }
+  .btn-primary:active { transform: translate(2px,2px); box-shadow: none; }
+  .btn-outline { background: var(--light); color: var(--primary); }
+  .btn-outline:hover { transform: translate(-1px,-1px); box-shadow: var(--shadow-sm); }
+  .btn-outline:active { transform: translate(2px,2px); box-shadow: none; }
+
+  .footer-bottom { text-align: center; color: var(--text-light); font-size: 0.78rem; margin-top: 6px; line-height: 1.6; }
+  .footer-bottom i { color: var(--blue); }
+</style>
+</head>
+<body>
+  <div class="bg-ambient" aria-hidden="true">
+    <div class="bg-grid"></div>
+    <div class="bg-shape circle blue s1"></div>
+    <div class="bg-shape square lime s2"></div>
+    <div class="bg-shape diamond blue s3"></div>
+    <div class="bg-shape circle lime s4"></div>
+    <div class="bg-shape diamond blue s5"></div>
+    <div class="bg-shape square lime s6"></div>
+    <div class="bg-particle" style="left:8%; width:16px; height:16px; background:var(--lime); animation-duration:8s; animation-delay:0s;"></div>
+    <div class="bg-particle" style="left:22%; width:12px; height:12px; background:var(--blue); animation-duration:10s; animation-delay:1s;"></div>
+    <div class="bg-particle" style="left:38%; width:18px; height:18px; background:transparent; animation-duration:9s; animation-delay:3s;"></div>
+    <div class="bg-particle" style="left:55%; width:13px; height:13px; background:var(--lime); animation-duration:11s; animation-delay:0.5s;"></div>
+    <div class="bg-particle" style="left:70%; width:14px; height:14px; background:transparent; animation-duration:8.5s; animation-delay:4s;"></div>
+    <div class="bg-particle" style="left:84%; width:17px; height:17px; background:var(--blue); animation-duration:10.5s; animation-delay:2s;"></div>
+    <div class="bg-particle" style="left:92%; width:10px; height:10px; background:var(--lime); animation-duration:7.5s; animation-delay:3.5s;"></div>
+    <div class="bg-particle" style="left:14%; width:13px; height:13px; background:transparent; animation-duration:9.5s; animation-delay:5s;"></div>
+  </div>
+
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-image-container">
+          <img src="https://rblktttasrxemtkhknvt.supabase.co/storage/v1/object/public/product-images/logo.jpg" alt="MoraStore Logo" class="logo-image" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-bolt\' style=\'color:#0A0A12\'></i>'">
+        </div>
+        <div class="logo-text">
+          <div class="logo-main">MORA<span>STORE</span></div>
+          <div class="logo-sub">Halaman Pembayaran</div>
+        </div>
+      </div>
+      <div class="nav-status"><span class="live-dot"></span><span class="txt">Real-time</span></div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+
+    <!-- HERO -->
+    <div class="payment-hero">
+      <div class="ph-badge"><span class="live-dot"></span> STATUS PEMBAYARAN</div>
+      <div class="ph-icon-wrap"><i class="fas fa-qrcode"></i></div>
+      <h1 id="heroTitle">SELESAIKAN <span class="accent">PEMBAYARAN</span> KAMU</h1>
+      <div class="ph-pills">
+        <div class="ph-pill"><i class="fas fa-lock"></i> Terenkripsi</div>
+        <div class="ph-pill"><i class="fas fa-bolt"></i> Real-time</div>
+        <div class="ph-pill"><i class="fas fa-clock"></i> Auto-expire 15 menit</div>
+      </div>
+    </div>
+
+    <!-- RINGKASAN PESANAN -->
+    <div class="section-card reveal">
+      <div class="section-head">
+        <div class="step-num">1</div>
+        <h2>Ringkasan Pesanan</h2>
+      </div>
+      <div id="orderSummary"></div>
+    </div>
+
+    <!-- STATUS CARD (loading / qr / success / expired / error) -->
+    <div class="section-card reveal">
+      <div class="section-head">
+        <div class="step-num">2</div>
+        <h2 id="headerTitle">Scan QRIS</h2>
+      </div>
+
+      <!-- LOADING -->
+      <div id="stateLoading">
+        <div class="loader">
+          <div class="skeleton-qr"></div>
+          <p><span class="spinner-sm"></span> Membuat kode QRIS...</p>
+        </div>
+      </div>
+
+      <!-- QR -->
+      <div id="stateQr">
+        <div class="qr-wrap">
+          <div class="amount-big" id="qrAmount">Rp0</div>
+          <div class="qr-box"><img id="qrImage" src="" alt="QRIS Code"></div>
+          <div class="timer" id="timerChip"><i class="fas fa-clock"></i> <span id="countdown">15:00</span></div>
+          <div class="polling-hint"><span class="poll-dots"><span></span><span></span><span></span></span> Mengecek status pembayaran otomatis...</div>
+          <button class="save-btn" id="btnSaveQr"><i class="fas fa-download"></i> Simpan Gambar QR</button>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div id="stateSuccess">
+        <div class="result-icon-wrap" id="confettiHost">
+          <div class="result-icon success"><i class="fas fa-check"></i></div>
+        </div>
+        <div class="result-title">Pembayaran Berhasil!</div>
+        <div class="result-desc">Terima kasih! Pesanan Anda sedang diproses. Klik tombol di bawah untuk konfirmasi ke Admin CS via WhatsApp supaya akun segera dikirim.</div>
+        <div class="process-note" style="margin-bottom:16px;"><i class="fas fa-circle-info"></i> PROSES MAKSIMAL 1X24JAM</div>
+        <a href="#" id="btnWaConfirm" class="btn btn-primary" target="_blank"><i class="fab fa-whatsapp"></i> Konfirmasi ke Admin</a>
+        <a href="../i1ndex" class="btn btn-outline"><i class="fas fa-store"></i> Kembali Belanja</a>
+      </div>
+
+      <!-- EXPIRED -->
+      <div id="stateExpired">
+        <div class="result-icon-wrap"><div class="result-icon expired"><i class="fas fa-hourglass-end"></i></div></div>
+        <div class="result-title">QRIS Kedaluwarsa</div>
+        <div class="result-desc">Waktu pembayaran sudah habis. Silakan buat pesanan baru untuk mendapatkan kode QRIS terbaru.</div>
+        <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-rotate-left"></i> Buat Pesanan Ulang</a>
+        <a href="../i1ndex" class="btn btn-outline"><i class="fas fa-store"></i> Kembali ke Beranda</a>
+      </div>
+
+      <!-- ERROR -->
+      <div id="stateError">
+        <div class="result-icon-wrap"><div class="result-icon error"><i class="fas fa-triangle-exclamation"></i></div></div>
+        <div class="result-title">Terjadi Kesalahan</div>
+        <div class="result-desc" id="errorDesc">Gagal membuat QRIS. Silakan coba lagi atau hubungi Admin CS.</div>
+        <a href="javascript:location.reload()" class="btn btn-primary"><i class="fas fa-rotate-right"></i> Coba Lagi</a>
+        <a href="https://wa.me/6285189139082" class="btn btn-outline" target="_blank"><i class="fab fa-whatsapp"></i> Hubungi Admin</a>
+      </div>
+    </div>
+
+    <p class="footer-bottom"><i class="fas fa-shield-halved"></i> Pembayaran diproses aman melalui QRIS resmi.<br>© <span id="currentYear"></span> MoraStore App Prems.</p>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  var supabaseClient = null;
+  try { supabaseClient = window.supabase.createClient('https://rblktttasrxemtkhknvt.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJibGt0dHRhc3J4ZW10a2hrbnZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU0NDQ5MzMsImV4cCI6MjEwMTAyMDkzM30.l4mPqAlPhZk-Z73_sKNARc3qTxAfUsKZyNl9u6N90Lw'); } catch(e) {}
+
+  var SUPABASE_URL = 'https://rblktttasrxemtkhknvt.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJibGt0dHRhc3J4ZW10a2hrbnZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU0NDQ5MzMsImV4cCI6MjEwMTAyMDkzM30.l4mPqAlPhZk-Z73_sKNARc3qTxAfUsKZyNl9u6N90Lw';
+  var ADMIN_WA = '6285189139082';
+
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+  // Reveal on scroll (sama seperti Netflix.html/YouTube.html)
+  document.addEventListener('DOMContentLoaded', function() {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+  });
+
+  function addRipple(el) {
+    if (!el) return;
+    el.style.position = el.style.position || 'relative';
+    el.addEventListener('click', function(e) {
+      var r = document.createElement('span'); r.className = 'ripple-effect';
+      var rect = el.getBoundingClientRect();
+      r.style.left = (e.clientX - rect.left - 5) + 'px';
+      r.style.top = (e.clientY - rect.top - 5) + 'px';
+      el.appendChild(r);
+      setTimeout(function() { r.remove(); }, 600);
+    });
+  }
+  document.querySelectorAll('.btn, .save-btn').forEach(addRipple);
+
+  function fmt(n) {
+    return 'Rp' + Number(n || 0).toLocaleString('id-ID');
+  }
+
+  function fireConfetti() {
+    var host = document.getElementById('confettiHost');
+    if (!host) return;
+    var colors = ['#D8FF3E', '#0033FF', '#FF4757', '#10B981', '#FFFFFF'];
+    for (var i = 0; i < 24; i++) {
+      var p = document.createElement('div');
+      p.className = 'confetti-piece';
+      p.style.left = (40 + Math.random() * 20 - 10) + '%';
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.animationDelay = (Math.random() * 0.3) + 's';
+      p.style.animationDuration = (1.2 + Math.random() * 0.8) + 's';
+      p.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+      host.appendChild(p);
+      (function(el) { setTimeout(function() { el.remove(); }, 2200); })(p);
+    }
+  }
+
+  function showState(id) {
+    ['stateLoading','stateQr','stateSuccess','stateExpired','stateError'].forEach(function(s) {
+      document.getElementById(s).classList.remove('active-state');
+    });
+    document.getElementById(id).classList.add('active-state');
+
+    var hero = document.getElementById('heroTitle');
+    var headerTitle = document.getElementById('headerTitle');
+    if (id === 'stateSuccess') {
+      hero.innerHTML = 'PEMBAYARAN <span class="accent">BERHASIL</span> DITERIMA';
+      headerTitle.textContent = 'Sukses!';
+      fireConfetti();
+    } else if (id === 'stateExpired') {
+      hero.innerHTML = 'WAKTU <span class="accent">PEMBAYARAN</span> HABIS';
+      headerTitle.textContent = 'QRIS Kedaluwarsa';
+    } else if (id === 'stateError') {
+      hero.innerHTML = 'ADA <span class="accent">KENDALA</span> TERJADI';
+      headerTitle.textContent = 'Terjadi Kesalahan';
+    } else if (id === 'stateQr') {
+      hero.innerHTML = 'SELESAIKAN <span class="accent">PEMBAYARAN</span> KAMU';
+      headerTitle.textContent = 'Scan QRIS';
+    } else {
+      hero.innerHTML = 'SELESAIKAN <span class="accent">PEMBAYARAN</span> KAMU';
+      headerTitle.textContent = 'Menyiapkan QRIS...';
+    }
+  }
+
+  // ==== Ambil data order dari token pendek (?o=KODE) via database ====
+  var params = new URLSearchParams(window.location.search);
+  var orderToken = params.get('o') || params.get('order') || '';
+  var orderRowId = null; // id (uuid) baris orders, dipakai untuk update status nanti
+  var order = {
+    product: '', package: '-', price: 0, profile: '', wa: '',
+    qty: 1, promo: '', discount: 0, total: 0
+  };
+
+  // Kompatibilitas lama: kalau ada yang masih akses dengan format URL panjang (?product=...&total=...)
+  function loadOrderFromLegacyParams() {
+    order = {
+      product: params.get('product') || 'Produk',
+      package: params.get('package') || '-',
+      price: parseInt(params.get('price')) || 0,
+      profile: params.get('profile') || params.get('email') || '',
+      wa: params.get('wa') || '',
+      qty: parseInt(params.get('qty')) || 1,
+      promo: params.get('promo') || '',
+      discount: parseInt(params.get('discount')) || 0,
+      total: parseInt(params.get('total')) || 0
+    };
+    if (!order.total) order.total = Math.max(0, (order.price * order.qty) - order.discount);
+  }
+
+  async function loadOrderFromToken() {
+    if (!supabaseClient) return false;
+    try {
+      var res = await supabaseClient.from('orders').select('*').eq('order_id', orderToken).single();
+      if (res.error || !res.data) return false;
+      var row = res.data;
+      orderRowId = row.id;
+      var acc = row.account_data || {};
+      order = {
+        product: row.product_name || 'Produk',
+        package: row.package_name || '-',
+        price: row.price || 0,
+        profile: acc.profile || '',
+        wa: row.customer_whatsapp || '',
+        qty: row.quantity || 1,
+        promo: acc.promo || '',
+        discount: acc.discount || 0,
+        total: row.total_amount || 0
+      };
+      // Kalau ternyata order ini sudah pernah dibayar sebelumnya (mis. buka link lama)
+      if ((row.status || '').toLowerCase() === 'paid') {
+        currentTx = (acc.autogopay_tx) || null;
+        showState('stateSuccess');
+        return true;
+      }
+      return true;
+    } catch (e) { return false; }
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  function renderSummary() {
+    var html = '';
+    html += '<div class="order-row"><span>Produk</span><span>' + escapeHtml(order.product) + '</span></div>';
+    html += '<div class="order-row"><span>Paket</span><span>' + escapeHtml(order.package) + '</span></div>';
+    html += '<div class="order-row"><span>Jumlah</span><span>' + order.qty + 'x</span></div>';
+    if (order.promo) html += '<div class="order-row"><span>Kode Promo</span><span>' + escapeHtml(order.promo) + ' (-' + fmt(order.discount) + ')</span></div>';
+    html += '<div class="order-row total"><span>Total Bayar</span><span>' + fmt(order.total) + '</span></div>';
+    html += '<div class="process-note"><i class="fas fa-circle-info"></i> PROSES MAKSIMAL 1X24JAM setelah pembayaran diterima</div>';
+    document.getElementById('orderSummary').innerHTML = html;
+  }
+
+  var pollTimer = null;
+  var countdownTimer = null;
+  var currentTx = null;
+  var emailSent = false;
+
+  async function callFn(name, body) {
+    var res = await fetch(SUPABASE_URL + '/functions/v1/' + name, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'apikey': SUPABASE_ANON_KEY
+      },
+      body: JSON.stringify(body)
+    });
+    return res.json();
+  }
+
+  // ==== Simpan/ambil transaksi aktif di localStorage supaya tidak hilang saat refresh ====
+  var STORAGE_KEY = 'morastore_pay_tx_' + btoa(unescape(encodeURIComponent(window.location.search)));
+
+  function saveTx(data) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch (e) {} }
+  function loadTx() { try { var raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : null; } catch (e) { return null; } }
+  function clearTx() { try { localStorage.removeItem(STORAGE_KEY); } catch (e) {} }
+
+  // ==== Simpan pesanan ke tabel `orders` supaya bisa dipantau real-time dari admin.html ====
+  async function createOrderRecord(transactionId) {
+    if (!supabaseClient) { console.error('MoraStore: supabaseClient belum siap, order tidak tersimpan ke DB'); return; }
+    try {
+      var acc = { profile: order.profile, promo: order.promo, discount: order.discount, autogopay_tx: transactionId };
+
+      if (orderRowId) {
+        // Order sudah dibuat sebelumnya (dari halaman produk via token pendek) -> tinggal update
+        var res = await supabaseClient.from('orders').update({
+          account_data: acc,
+          payment_method: 'QRIS',
+          status: 'Pending'
+        }).eq('id', orderRowId);
+        if (res.error) console.error('MoraStore: gagal update order ke DB ->', res.error);
+      } else {
+        // Fallback (akses lama via URL panjang, tanpa token) -> insert baris baru
+        var res2 = await supabaseClient.from('orders').insert({
+          order_id: transactionId,
+          product_name: order.product,
+          package_name: order.package,
+          price: order.price || Math.round(order.total / (order.qty || 1)),
+          quantity: order.qty,
+          total_amount: order.total,
+          customer_whatsapp: order.wa || order.profile || '-',
+          account_data: acc,
+          payment_method: 'QRIS',
+          status: 'Pending'
+        });
+        if (res2.error) console.error('MoraStore: gagal simpan order ke DB ->', res2.error);
+      }
+    } catch (e) { console.error('MoraStore: exception saat simpan order ->', e); }
+  }
+
+  async function markOrderPaid(transactionId) {
+    if (!supabaseClient) return;
+    try {
+      var q = supabaseClient.from('orders').update({
+        status: 'Paid',
+        paid_at: new Date().toISOString(),
+        total_payment: order.total
+      });
+      if (orderRowId) await q.eq('id', orderRowId);
+      else if (transactionId) await q.eq('order_id', transactionId);
+    } catch (e) { /* diamkan */ }
+  }
+
+  async function markOrderExpired(transactionId) {
+    if (!supabaseClient) return;
+    try {
+      var q = supabaseClient.from('orders').update({ status: 'Expired' });
+      if (orderRowId) await q.eq('id', orderRowId);
+      else if (transactionId) await q.eq('order_id', transactionId);
+    } catch (e) { /* diamkan */ }
+  }
+
+  function startCountdown(expiryTimeStr) {
+    var expiry = new Date(expiryTimeStr.replace(' ', 'T') + '+07:00').getTime();
+    if (isNaN(expiry)) expiry = Date.now() + 15 * 60 * 1000;
+
+    clearInterval(countdownTimer);
+    countdownTimer = setInterval(function() {
+      var diff = expiry - Date.now();
+      if (diff <= 0) {
+        clearInterval(countdownTimer);
+        clearInterval(pollTimer);
+        markOrderExpired(currentTx);
+        clearTx();
+        showState('stateExpired');
+        return;
+      }
+      var m = Math.floor(diff / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('countdown').textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+
+      var chip = document.getElementById('timerChip');
+      if (diff <= 2 * 60 * 1000) chip.classList.add('urgent'); else chip.classList.remove('urgent');
+    }, 1000);
+  }
+
+  function startPolling(transactionId) {
+    clearInterval(pollTimer);
+    pollTimer = setInterval(async function() {
+      try {
+        var res = await callFn('autogopay-status', { transaction_id: transactionId });
+        if (res && res.success && res.data) {
+          var status = res.data.transaction_status || res.data.status;
+          if (status === 'settlement') {
+            clearInterval(pollTimer);
+            clearInterval(countdownTimer);
+            clearTx();
+            onPaymentSuccess();
+          } else if (status === 'expire' || status === 'cancel') {
+            clearInterval(pollTimer);
+            clearInterval(countdownTimer);
+            markOrderExpired(transactionId);
+            clearTx();
+            showState('stateExpired');
+          }
+        }
+      } catch (e) { /* diamkan, coba lagi di polling berikutnya */ }
+    }, 3000);
+  }
+
+  function onPaymentSuccess() {
+    markOrderPaid(currentTx);
+    var msg = 'Halo Admin CS *MoraStore*, saya sudah bayar QRIS untuk order:\n\n' +
+      '📌 *Produk:* ' + order.product + '\n' +
+      '📦 *Paket:* ' + order.package + '\n' +
+      '👤 *Profil/Email:* ' + order.profile + '\n' +
+      '📱 *No. WA:* ' + order.wa + '\n' +
+      '🔢 *Jumlah:* ' + order.qty + ' pcs\n' +
+      (order.promo ? '🎟️ *Kode Promo:* ' + order.promo + '\n' : '') +
+      '💰 *Total Dibayar:* ' + fmt(order.total) + '\n' +
+      (currentTx ? '🧾 *ID Transaksi:* ' + currentTx + '\n' : '') +
+      '\nMohon segera diproses ya kak, terima kasih!';
+
+    document.getElementById('btnWaConfirm').href = 'https://wa.me/' + ADMIN_WA + '?text=' + encodeURIComponent(msg);
+    showState('stateSuccess');
+    sendOrderEmail();
+  }
+
+  async function sendOrderEmail() {
+    if (emailSent) return;
+    emailSent = true;
+    try {
+      await callFn('send-order-email', {
+        product: order.product, package: order.package, qty: order.qty, profile: order.profile, wa: order.wa,
+        promo: order.promo, discount: order.discount, total: order.total, transaction_id: currentTx,
+        paid_at: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }) + ' WIB'
+      });
+    } catch (e) { /* diamkan */ }
+  }
+
+  document.getElementById('btnSaveQr').addEventListener('click', function() {
+    var img = document.getElementById('qrImage');
+    var a = document.createElement('a');
+    a.href = img.src; a.download = 'QRIS-MoraStore.png';
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  async function resumeExistingTx() {
+    var saved = loadTx();
+    if (!saved) return false;
+
+    var expiry = new Date(saved.expiry_time.replace(' ', 'T') + '+07:00').getTime();
+    if (isNaN(expiry) || expiry <= Date.now()) { clearTx(); return false; }
+
+    try {
+      var statusRes = await callFn('autogopay-status', { transaction_id: saved.transaction_id });
+      if (statusRes && statusRes.success && statusRes.data) {
+        var status = statusRes.data.transaction_status || statusRes.data.status;
+        if (status === 'settlement') { clearTx(); currentTx = saved.transaction_id; onPaymentSuccess(); return true; }
+        if (status === 'expire' || status === 'cancel') { clearTx(); return false; }
+      }
+    } catch (e) {}
+
+    currentTx = saved.transaction_id;
+    document.getElementById('qrAmount').textContent = fmt(order.total);
+    document.getElementById('qrImage').src = saved.qr_url;
+    showState('stateQr');
+    startCountdown(saved.expiry_time);
+    startPolling(saved.transaction_id);
+    return true;
+  }
+
+  async function generateQris() {
+    showState('stateLoading');
+
+    var resumed = await resumeExistingTx();
+    if (resumed) return;
+
+    try {
+      var res = await callFn('autogopay-generate', { amount: order.total });
+      if (!res || res.success !== true || !res.data) {
+        document.getElementById('errorDesc').textContent = (res && res.message) ? res.message : 'Gagal membuat QRIS. Silakan coba lagi.';
+        showState('stateError');
+        return;
+      }
+
+      var d = res.data;
+      currentTx = d.transaction_id;
+      saveTx({ transaction_id: d.transaction_id, qr_url: d.qr_url, expiry_time: d.expiry_time });
+      createOrderRecord(d.transaction_id);
+
+      document.getElementById('qrAmount').textContent = fmt(order.total);
+      document.getElementById('qrImage').src = d.qr_url;
+
+      showState('stateQr');
+      startCountdown(d.expiry_time);
+      startPolling(d.transaction_id);
+    } catch (e) {
+      document.getElementById('errorDesc').textContent = 'Tidak bisa terhubung ke server pembayaran. Cek koneksi internet Anda.';
+      showState('stateError');
+    }
+  }
+
+  async function initPayPage() {
+    var loaded = false;
+
+    if (orderToken) {
+      loaded = await loadOrderFromToken();
+    }
+    if (!loaded) {
+      loadOrderFromLegacyParams();
+    }
+
+    renderSummary();
+
+    if (currentTx) {
+      // Order token ternyata sudah pernah lunas sebelumnya, tampilan sukses sudah ditangani di loadOrderFromToken()
+      return;
+    }
+
+    if (order.total <= 0) {
+      document.getElementById('errorDesc').textContent = 'Data pesanan tidak ditemukan atau tidak lengkap. Silakan ulangi dari halaman produk.';
+      showState('stateError');
+    } else {
+      generateQris();
+    }
+  }
+
+  initPayPage();
+</script>
+</body>
+</html>

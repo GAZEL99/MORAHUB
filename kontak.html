@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Kontak Kami - MoraStore</title>
+<meta name="description" content="Hubungi Admin CS MoraStore via WhatsApp, Instagram, atau Telegram untuk bantuan order dan info produk.">
+<link rel="icon" href="https://rblktttasrxemtkhknvt.supabase.co/storage/v1/object/public/product-images/logo.jpg" type="image/jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root {
+    --blue: #0033FF; --blue-dark: #0022B8; --blue-light: #D6DEFF;
+    --lime: #D8FF3E; --lime-dark: #B9E300;
+    --primary: #0A0A12; --text-dark: #0A0A12; --text: #24242E; --text-light: #6B6B78;
+    --light: #FFFFFF; --light-gray: #F4F5FB; --gray: #E3E5F3; --border: #0A0A12;
+    --shadow: 5px 5px 0px var(--border); --shadow-sm: 3px 3px 0px var(--border); --shadow-lg: 8px 8px 0px var(--border);
+    --radius: 20px; --transition: all 0.25s cubic-bezier(0.4,0,0.2,1); --success: #10B981;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+  html { font-size:16px; scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+  @media (max-width:480px){ html{font-size:14px;} }
+  body { background:#FFFFFF; color:var(--text); line-height:1.6; min-height:100vh; overflow-x:hidden; padding-top:90px; padding-bottom:60px; font-family:'Poppins',sans-serif; position:relative; }
+  @media (max-width:480px){ body{padding-top:76px;} }
+  a { color:inherit; text-decoration:none; }
+
+  .bg-ambient { position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
+  .bg-grid { position:absolute; inset:-60px; background-image: linear-gradient(rgba(10,10,18,0.07) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(10,10,18,0.07) 1.5px, transparent 1.5px); background-size:42px 42px; animation: gridPan 14s linear infinite; }
+  @keyframes gridPan { from{transform:translate(0,0);} to{transform:translate(42px,42px);} }
+  .bg-shape { position:absolute; border:3px solid var(--border); opacity:0.5; background:transparent; }
+  .bg-shape.circle{border-radius:50%;} .bg-shape.square{border-radius:8px;} .bg-shape.diamond{border-radius:8px; transform:rotate(45deg);}
+  .bg-shape.blue{border-color:var(--blue); background:rgba(0,51,255,0.12); opacity:0.55;}
+  .bg-shape.lime{border-color:var(--lime-dark); background:rgba(216,255,62,0.35); opacity:0.6;}
+  .bg-shape.s1{width:180px;height:180px;top:6%;left:-60px;animation:driftRotate1 13s ease-in-out infinite;}
+  .bg-shape.s2{width:130px;height:130px;top:16%;right:4%;animation:driftRotate2 11s ease-in-out infinite;}
+  .bg-shape.s3{width:90px;height:90px;top:42%;left:2%;animation:driftRotate3 9s ease-in-out infinite;}
+  .bg-shape.s4{width:220px;height:220px;bottom:-80px;right:-60px;animation:driftRotate1 15s ease-in-out infinite reverse;}
+  @keyframes driftRotate1{0%,100%{transform:translate(0,0) rotate(0deg);}50%{transform:translate(50px,60px) rotate(30deg);}}
+  @keyframes driftRotate2{0%,100%{transform:translate(0,0) rotate(0deg);}50%{transform:translate(-45px,50px) rotate(-24deg);}}
+  @keyframes driftRotate3{0%,100%{transform:translate(0,0) rotate(45deg);}50%{transform:translate(35px,-45px) rotate(80deg);}}
+  .bg-particle { position:absolute; bottom:-20px; border:2px solid var(--border); opacity:0; animation:particleUp linear infinite; }
+  @keyframes particleUp{0%{transform:translateY(0) rotate(0deg);opacity:0;}10%{opacity:.85;}90%{opacity:.7;}100%{transform:translateY(-110vh) rotate(200deg);opacity:0;}}
+  @media (prefers-reduced-motion: reduce){ .bg-grid,.bg-shape,.bg-particle{animation:none!important;} }
+
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes navbarIn{from{transform:translateY(-120%);opacity:0;}to{transform:translateY(0);opacity:1;}}
+  @keyframes ripple{to{transform:scale(4);opacity:0;}}
+  @keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s cubic-bezier(.4,0,.2,1), transform .5s cubic-bezier(.4,0,.2,1);}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .ripple-effect{position:absolute;border-radius:50%;background:rgba(255,255,255,.45);width:10px;height:10px;pointer-events:none;transform:scale(0);animation:ripple .55s linear;}
+
+  .navbar{position:fixed;top:14px;left:14px;right:14px;background:var(--primary);border:2.5px solid var(--border);border-radius:999px;z-index:1000;height:58px;display:flex;align-items:center;box-shadow:var(--shadow);animation:navbarIn .5s ease both;max-width:1200px;margin:14px auto 0;}
+  @media (min-width:769px){.navbar{height:66px;top:16px;}}
+  @media (max-width:480px){.navbar{top:10px;left:10px;right:10px;height:52px;margin-top:10px;}}
+  .nav-container{width:100%;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 12px;}
+  .logo{display:flex;align-items:center;gap:9px;min-width:0;flex-shrink:0;}
+  .logo-image-container{width:40px;height:40px;border:2px solid var(--border);box-shadow:var(--shadow-sm);overflow:hidden;background:var(--lime);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .logo-image{width:100%;height:100%;object-fit:cover;}
+  .logo-text{display:flex;flex-direction:column;}
+  .logo-main{font-size:1.05rem;font-weight:900;color:#fff;line-height:1;letter-spacing:-.3px;font-family:'Cabinet Grotesk','Space Grotesk',sans-serif;text-transform:uppercase;}
+  .logo-main span{color:var(--lime);}
+  .logo-sub{font-size:.55rem;font-weight:700;letter-spacing:2px;margin-top:2px;color:rgba(255,255,255,.6);text-transform:uppercase;}
+  .nav-back{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;background:rgba(255,255,255,.08);color:#fff;border:2px solid rgba(255,255,255,.25);border-radius:999px;font-weight:700;font-size:.75rem;font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.5px;transition:var(--transition);}
+  .nav-back:hover{background:var(--lime);color:var(--primary);border-color:var(--border);}
+  @media (max-width:480px){.nav-back span.txt{display:none;}.nav-back{padding:8px 10px;}}
+
+  .main-container{max-width:720px;width:100%;margin:0 auto;padding:0 16px;}
+
+  .page-hero{background:var(--blue);background-image:linear-gradient(rgba(255,255,255,.12) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(255,255,255,.12) 1.5px, transparent 1.5px);background-size:36px 36px;border:2.5px solid var(--border);border-radius:var(--radius);padding:32px 24px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow-lg);margin-bottom:26px;text-align:center;animation:fadeInUp .4s ease both;}
+  @media (max-width:480px){.page-hero{padding:26px 18px;}}
+  .ph-badge{display:inline-flex;align-items:center;gap:6px;background:var(--lime);color:var(--text-dark);font-weight:900;font-size:.72rem;padding:5px 14px;border-radius:999px;border:2px solid var(--border);text-transform:uppercase;letter-spacing:.5px;font-family:'Space Grotesk',sans-serif;margin-bottom:16px;box-shadow:2px 2px 0 var(--border);}
+  .page-hero h1{font-size:2rem;font-weight:900;font-family:'Cabinet Grotesk','Space Grotesk',sans-serif;line-height:1.1;letter-spacing:-.5px;text-transform:uppercase;text-shadow:2px 2px 0 rgba(0,0,0,.25);}
+  .page-hero h1 .accent{color:var(--lime);}
+  @media (max-width:480px){.page-hero h1{font-size:1.55rem;}}
+  .page-hero p{margin-top:10px;color:rgba(255,255,255,.85);font-size:.92rem;font-weight:500;}
+
+  .contact-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 24px; }
+  .contact-card {
+    display: flex; align-items: center; gap: 16px; background: var(--light); border: 2.5px solid var(--border);
+    border-radius: 18px; padding: 18px; box-shadow: var(--shadow-sm); transition: var(--transition); animation: fadeInUp .4s ease both;
+  }
+  .contact-card:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-lg); }
+  .cc-icon {
+    width: 54px; height: 54px; border-radius: 16px; border: 2.5px solid var(--border); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #fff; box-shadow: var(--shadow-sm);
+    animation: floatY 3.2s ease-in-out infinite;
+  }
+  .cc-icon.wa { background: #25D366; }
+  .cc-icon.ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+  .cc-icon.tg { background: #229ED9; }
+  .cc-body { flex: 1; min-width: 0; }
+  .cc-title { font-weight: 800; font-size: .98rem; color: var(--text-dark); font-family: 'Space Grotesk', sans-serif; }
+  .cc-desc { font-size: .8rem; color: var(--text-light); margin-top: 2px; }
+  .cc-arrow { color: var(--text-light); font-size: 1rem; flex-shrink: 0; transition: var(--transition); }
+  .contact-card:hover .cc-arrow { color: var(--blue); transform: translateX(4px); }
+
+  .section-card{background:var(--light);border:2.5px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:20px;box-shadow:var(--shadow-sm);animation:fadeInUp .4s ease both;}
+  @media (max-width:480px){.section-card{padding:16px;border-radius:16px;}}
+  .section-head{display:flex;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:16px;border-bottom:2.5px solid var(--border);}
+  .step-num{width:34px;height:34px;background:var(--blue);color:#fff;border:2px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-family:'Space Grotesk',sans-serif;box-shadow:2px 2px 0 var(--border);flex-shrink:0;}
+  .section-head h2{font-size:1.02rem;font-weight:800;color:var(--text-dark);font-family:'Space Grotesk',sans-serif;text-transform:uppercase;}
+
+  .hours-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1.5px dashed var(--gray); font-size: .88rem; }
+  .hours-row:last-child { border-bottom: none; }
+  .hours-day { font-weight: 700; color: var(--text-dark); }
+  .hours-time { color: var(--text-light); font-weight: 600; }
+  .hours-badge { background: rgba(16,185,129,.12); color: var(--success); border: 1.5px solid var(--success); font-size: .68rem; font-weight: 800; padding: 3px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 14px; }
+  .hours-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); animation: pulseDot 1.3s ease-in-out infinite; }
+  @keyframes pulseDot { 0%,100%{opacity:.4;} 50%{opacity:1;} }
+
+  .footer-bottom{text-align:center;color:var(--text-light);font-size:.78rem;margin-top:10px;line-height:1.6;}
+  .footer-bottom i{color:var(--blue);}
+</style>
+</head>
+<body>
+  <div class="bg-ambient" aria-hidden="true">
+    <div class="bg-grid"></div>
+    <div class="bg-shape circle blue s1"></div>
+    <div class="bg-shape square lime s2"></div>
+    <div class="bg-shape diamond blue s3"></div>
+    <div class="bg-shape circle lime s4"></div>
+    <div class="bg-particle" style="left:10%;width:14px;height:14px;background:var(--lime);animation-duration:8s;animation-delay:0s;"></div>
+    <div class="bg-particle" style="left:50%;width:16px;height:16px;background:transparent;animation-duration:9s;animation-delay:3s;"></div>
+    <div class="bg-particle" style="left:85%;width:12px;height:12px;background:var(--blue);animation-duration:10s;animation-delay:2s;"></div>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="i1ndex" class="logo">
+        <div class="logo-image-container">
+          <img src="https://rblktttasrxemtkhknvt.supabase.co/storage/v1/object/public/product-images/logo.jpg" alt="MoraStore Logo" class="logo-image" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-bolt\' style=\'color:#0A0A12\'></i>'">
+        </div>
+        <div class="logo-text">
+          <div class="logo-main">MORA<span>STORE</span></div>
+          <div class="logo-sub">Kontak Kami</div>
+        </div>
+      </a>
+      <a href="i1ndex" class="nav-back"><i class="fas fa-arrow-left"></i> <span class="txt">Kembali</span></a>
+    </div>
+  </nav>
+
+  <div class="main-container">
+
+    <div class="page-hero">
+      <div class="ph-badge"><i class="fas fa-headset"></i> Kami Siap Bantu</div>
+      <h1>HUBUNGI <span class="accent">ADMIN CS</span> KAMI</h1>
+      <p>Ada pertanyaan seputar produk, pesanan, atau kendala akun? Langsung chat aja, responnya cepat!</p>
+    </div>
+
+    <div class="contact-grid">
+      <a href="https://wa.me/6285189139082" target="_blank" class="contact-card reveal">
+        <div class="cc-icon wa"><i class="fab fa-whatsapp"></i></div>
+        <div class="cc-body">
+          <div class="cc-title">WhatsApp Admin CS</div>
+          <div class="cc-desc">+62 851-8913-9082 &middot; Paling cepat direspon</div>
+        </div>
+        <i class="fas fa-chevron-right cc-arrow"></i>
+      </a>
+
+      <a href="https://instagram.com/morastore.id" target="_blank" class="contact-card reveal">
+        <div class="cc-icon ig"><i class="fab fa-instagram"></i></div>
+        <div class="cc-body">
+          <div class="cc-title">Instagram</div>
+          <div class="cc-desc">@morastore.id &middot; Info promo & update produk</div>
+        </div>
+        <i class="fas fa-chevron-right cc-arrow"></i>
+      </a>
+
+      <a href="https://t.me/morastoreid" target="_blank" class="contact-card reveal">
+        <div class="cc-icon tg"><i class="fab fa-telegram"></i></div>
+        <div class="cc-body">
+          <div class="cc-title">Telegram</div>
+          <div class="cc-desc">@morastoreid &middot; Channel notifikasi & bantuan</div>
+        </div>
+        <i class="fas fa-chevron-right cc-arrow"></i>
+      </a>
+    </div>
+
+    <div class="section-card reveal">
+      <div class="section-head">
+        <div class="step-num"><i class="fas fa-clock" style="font-size:.85rem"></i></div>
+        <h2>Jam Operasional CS</h2>
+      </div>
+      <div class="hours-badge"><span class="dot"></span> Admin online sekarang</div>
+      <div class="hours-row"><span class="hours-day">Senin - Jumat</span><span class="hours-time">08.00 - 22.00 WIB</span></div>
+      <div class="hours-row"><span class="hours-day">Sabtu - Minggu</span><span class="hours-time">09.00 - 21.00 WIB</span></div>
+      <div class="hours-row"><span class="hours-day">Di luar jam operasional</span><span class="hours-time">Tetap bisa order, diproses besok</span></div>
+    </div>
+
+    <div class="section-card reveal">
+      <div class="section-head">
+        <div class="step-num"><i class="fas fa-circle-info" style="font-size:.85rem"></i></div>
+        <h2>Sebelum Chat Admin</h2>
+      </div>
+      <p style="font-size:.87rem;color:var(--text-light);line-height:1.7;">
+        Supaya lebih cepat diproses, siapkan dulu: <strong>nama produk</strong> yang mau ditanyakan/dibeli, dan kalau sudah order, sertakan <strong>ID transaksi / bukti pembayaran</strong>. Untuk cara belanja lengkap, cek halaman <a href="cara-order" style="color:var(--blue);font-weight:700;">Cara Order</a>.
+      </p>
+    </div>
+
+    <p class="footer-bottom"><i class="fas fa-shield-halved"></i> Kami balas semua pesan dengan ramah & responsif.<br>© <span id="currentYear"></span> MoraStore App Prems.</p>
+  </div>
+
+<script>
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+  document.addEventListener('DOMContentLoaded', function() {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+  });
+  document.querySelectorAll('.contact-card').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      var r = document.createElement('span'); r.className = 'ripple-effect';
+      var rect = el.getBoundingClientRect();
+      r.style.left = (e.clientX - rect.left - 5) + 'px';
+      r.style.top = (e.clientY - rect.top - 5) + 'px';
+      el.style.position = 'relative'; el.style.overflow = 'hidden';
+      el.appendChild(r);
+      setTimeout(function() { r.remove(); }, 600);
+    });
+  });
+</script>
+</body>
+</html>
